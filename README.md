@@ -1,5 +1,5 @@
 # SnakeGame
-Snake game in Java
+Snake game in Java, demonstrating OOP, simple GUI, event listeners, machine states
 
 ### HOW TO PLAY
 
