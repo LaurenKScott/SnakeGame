@@ -14,7 +14,8 @@ public class GameBoard extends JPanel{
     final int y[] = new int[CELL_COUNT];
     int foodX;
     int foodY;
-    int snakeSize = 2;
+    int snakeSize = 5;
+    char direction = 'R';
     boolean running = false;
     Random random;
 
@@ -34,20 +35,23 @@ public class GameBoard extends JPanel{
         draw(g);
     }
     public void draw(Graphics g){
+        //drawing gridlines
         for (int i=0; i<(BOARD_WIDTH/CELL_SIZE);i++) {
             //draw vertical lines: (x1, y1) = (CELL_SIZE, 0) to (x2,y2) = (SAME, BOARD_HEIGHT)
             g.drawLine(i*CELL_SIZE, 0, i*CELL_SIZE, BOARD_HEIGHT);
             g.drawLine(0, i*CELL_SIZE, BOARD_WIDTH, i*CELL_SIZE);
         }
+        //drawing food
         g.setColor(Color.red);
         g.fillOval(foodX, foodY, CELL_SIZE, CELL_SIZE);
-
+        //drawing the snake
         for (int i=0; i<snakeSize; i++) {
             if (i == 0) {
                 // set head color to different shade of green for improved visibility
                 g.setColor(new Color(50, 200, 20));
                 g.fillRect(x[i], y[i], CELL_SIZE, CELL_SIZE);
-            }else {
+            }
+            else {
                 g.setColor(Color.GREEN);
                 g.fillRect(x[i], y[i], CELL_SIZE, CELL_SIZE);
             }
@@ -63,6 +67,18 @@ public class GameBoard extends JPanel{
         for (int i=snakeSize; i>0; i--) {
             x[i] = x[i-1];
             y[i] = y[i-1];
+        }
+        switch(direction) {
+            case 'U':
+                //top is at  y=0. shift y coords UP
+                y[0] = y[0] - CELL_SIZE;
+            case 'D':
+                y[0] = y[0] + CELL_SIZE;
+            case 'L':
+                //left is at x=0. shift x coords LEFT
+                x[0] = x[0] - CELL_SIZE;
+            case 'R': 
+                x[0] = x[0] + CELL_SIZE;
         }
     }
 
