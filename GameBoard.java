@@ -1,5 +1,5 @@
 import java.util.Random;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -9,7 +9,7 @@ public class GameBoard extends JPanel{
     static final int BOARD_WIDTH = 600;
     static final int CELL_SIZE = 20;
     static final int CELL_COUNT = ((BOARD_HEIGHT * BOARD_WIDTH) / CELL_SIZE);
-
+    static final int DELAY = 100;
     final int x[] = new int[CELL_COUNT];
     final int y[] = new int[CELL_COUNT];
 
@@ -19,6 +19,7 @@ public class GameBoard extends JPanel{
     char direction = 'R';
     boolean running = false;
     Random random;
+    Timer timer;
 
     GameBoard(){
         random = new Random();
@@ -31,6 +32,7 @@ public class GameBoard extends JPanel{
     public void startGame(){
         newFood();
         running = true;
+        timer = new Timer(DELAY, this);
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
