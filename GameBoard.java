@@ -1,7 +1,7 @@
 import java.util.Random;
 import javax.swing.JPanel;
 import java.awt.*;
-//import java.awt.event.*;
+import java.awt.event.*;
 
 public class GameBoard extends JPanel{
 
@@ -14,7 +14,7 @@ public class GameBoard extends JPanel{
     final int y[] = new int[CELL_COUNT];
     int foodX;
     int foodY;
-    int snakeSize = 1;
+    int snakeSize = 2;
     boolean running = false;
     Random random;
 
@@ -23,7 +23,6 @@ public class GameBoard extends JPanel{
         this.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
         this.setBackground(Color.DARK_GRAY);
         this.setFocusable(true);
-        //this.addKeyListener();
         startGame();
     }
     public void startGame(){
@@ -42,11 +41,29 @@ public class GameBoard extends JPanel{
         }
         g.setColor(Color.red);
         g.fillOval(foodX, foodY, CELL_SIZE, CELL_SIZE);
+
+        for (int i=0; i<snakeSize; i++) {
+            if (i == 0) {
+                // set head color to different shade of green for improved visibility
+                g.setColor(new Color(50, 200, 20));
+                g.fillRect(x[i], y[i], CELL_SIZE, CELL_SIZE);
+            }else {
+                g.setColor(Color.GREEN);
+                g.fillRect(x[i], y[i], CELL_SIZE, CELL_SIZE);
+            }
+        }
     }
     public void newFood() {
         //set random x and y coordinates for next food location
         foodX = random.nextInt((int)(BOARD_WIDTH/CELL_SIZE))*CELL_SIZE;
         foodY = random.nextInt((int)(BOARD_HEIGHT/CELL_SIZE))*CELL_SIZE;
     }
-    
+    public void moveSnake(){
+        //Change coordinates of the snake moving from HEAD to TAIL
+        for (int i=snakeSize; i>0; i--) {
+            x[i] = x[i-1];
+            y[i] = y[i-1];
+        }
+    }
+
 }
