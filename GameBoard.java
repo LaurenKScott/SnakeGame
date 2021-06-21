@@ -12,6 +12,7 @@ public class GameBoard extends JPanel{
 
     final int x[] = new int[CELL_COUNT];
     final int y[] = new int[CELL_COUNT];
+
     int foodX;
     int foodY;
     int snakeSize = 5;
@@ -24,6 +25,7 @@ public class GameBoard extends JPanel{
         this.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
         this.setBackground(Color.DARK_GRAY);
         this.setFocusable(true);
+        this.addKeyListener(new gameKeyAdapter());
         startGame();
     }
     public void startGame(){
@@ -48,7 +50,7 @@ public class GameBoard extends JPanel{
         for (int i=0; i<snakeSize; i++) {
             if (i == 0) {
                 // set head color to different shade of green for improved visibility
-                g.setColor(new Color(50, 200, 20));
+                g.setColor(new Color(50, 200, 0));
                 g.fillRect(x[i], y[i], CELL_SIZE, CELL_SIZE);
             }
             else {
@@ -72,14 +74,36 @@ public class GameBoard extends JPanel{
             case 'U':
                 //top is at  y=0. shift y coords UP
                 y[0] = y[0] - CELL_SIZE;
+                break;
             case 'D':
                 y[0] = y[0] + CELL_SIZE;
+                break;
             case 'L':
                 //left is at x=0. shift x coords LEFT
                 x[0] = x[0] - CELL_SIZE;
+                break;
             case 'R': 
                 x[0] = x[0] + CELL_SIZE;
+                break;
         }
     }
+    public void checkFood(){
 
+    }
+    public void checkCollisions() {
+
+    }
+    public void gameOver(Graphics g) {
+
+    }
+    
+    public void actionPerformed(ActionEvent e){
+        if (running) {
+            moveSnake();
+            checkFood();
+            checkCollisions();
+        }
+        repaint();
+    }
+    public class gameKeyAdapter extends KeyAdapter {}
 }
