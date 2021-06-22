@@ -49,6 +49,11 @@ public class GameBoard extends JPanel implements ActionListener{
                 g.drawLine(i*CELL_SIZE, 0, i*CELL_SIZE, BOARD_HEIGHT);
                 g.drawLine(0, i*CELL_SIZE, BOARD_WIDTH, i*CELL_SIZE);
             }
+            //display score
+            g.setColor(Color.RED);
+            g.setFont(new Font("SansSerif", Font.PLAIN, 30));
+            FontMetrics metrics = getFontMetrics(g.getFont());
+            g.drawString("SCORE: "+score, (BOARD_WIDTH-metrics.stringWidth("SCORE: "+score))/2, g.getFont().getSize());
             //drawing food
             g.setColor(Color.red);
             g.fillOval(foodX, foodY, CELL_SIZE, CELL_SIZE);
@@ -131,7 +136,13 @@ public class GameBoard extends JPanel implements ActionListener{
         g.setFont(new Font("SansSerif", Font.BOLD, 75));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString(gs, (BOARD_WIDTH-metrics.stringWidth(gs))/2, BOARD_HEIGHT/2);
+        String finsco = "SCORE: "+score;
+        g.setColor(Color.RED);
+        g.setFont(new Font("SansSerif", Font.PLAIN, 30));
+        FontMetrics met2 = getFontMetrics(g.getFont());
+        g.drawString(finsco, (BOARD_WIDTH-met2.stringWidth(finsco))/2, g.getFont().getSize());
     }
+    
     @Override
     public void actionPerformed(ActionEvent e){
         if (running) {
