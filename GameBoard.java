@@ -9,14 +9,15 @@ public class GameBoard extends JPanel implements ActionListener{
     static final int BOARD_WIDTH = 600;
     static final int CELL_SIZE = 20;
     static final int CELL_COUNT = ((BOARD_HEIGHT * BOARD_WIDTH) / CELL_SIZE);
-    static final int SPEED = 100;
+    static final int SPEED = 70;
     //represents x, y coordinates of snake, with the head at [0][0]
     final int snakeX[] = new int[CELL_COUNT];
     final int snakeY[] = new int[CELL_COUNT];
 
     int foodX;
     int foodY;
-    int snakeSize = 5;
+    int snakeSize = 3;
+    int score = 0;
     char direction = 'R';
     boolean running = false;
     Random random;
@@ -92,7 +93,12 @@ public class GameBoard extends JPanel implements ActionListener{
         }
     }
     public void checkFood(){
-
+        //if snake picks up food, update score, lengthen snake, and get new food position
+        if ((snakeX[0] == foodX) && (snakeY[0] == foodY)) {
+            score++;
+            snakeSize++;
+            newFood();
+        }
     }
     public void checkCollisions() {
         //iterate over snake body. if collision occurs, set running to false
