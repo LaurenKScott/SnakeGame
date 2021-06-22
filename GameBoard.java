@@ -126,6 +126,56 @@ public class GameBoard extends JPanel implements ActionListener{
         repaint();
     }
     public class gameKeyAdapter extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch(e.getKeyCode()) {
+                //KEY CODES FOR ARROW KEYS: VK_dir or VK_letter for WASD
+                //LEFT DIRECTION
+                case KeyEvent.VK_LEFT:
+                    if (direction != 'R') {
+                        direction = 'L';
+                    }
+                    break;
+                case KeyEvent.VK_A:
+                    if (direction != 'R') {
+                        direction = 'L';
+                    }
+                    break;
+                // RIGHT DIRECTION
+                case KeyEvent.VK_RIGHT:
+                    if (direction != 'L') {
+                        direction = 'R';
+                    }
+                    break;
+                case KeyEvent.VK_D:
+                    if (direction != 'L') {
+                    direction = 'R';
+                    }
+                    break;
+                // UP DIRECTION
+                case KeyEvent.VK_UP:
+                    if (direction != 'D') {
+                        direction = 'U';
+                    }
+                    break;
+                case KeyEvent.VK_W:
+                    if (direction != 'D') {
+                        direction = 'U';
+                    }
+                    break;
+                //DOWN DIRECTION
+                case KeyEvent.VK_DOWN:
+                    if (direction != 'U') {
+                        direction = 'D';
+                    }
+                    break;
+                case KeyEvent.VK_S:
+                    if (direction != 'U') {
+                        direction = 'D';
+                    }
+                    break;
+            }
+        }
 
     }
 }
