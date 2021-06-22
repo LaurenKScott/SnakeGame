@@ -9,7 +9,7 @@ public class GameBoard extends JPanel implements ActionListener{
     static final int BOARD_WIDTH = 600;
     static final int CELL_SIZE = 20;
     static final int CELL_COUNT = ((BOARD_HEIGHT * BOARD_WIDTH) / CELL_SIZE);
-    static final int SPEED = 70;
+    static final int SPEED = 65;
     //represents x, y coordinates of snake, with the head at [0][0]
     final int snakeX[] = new int[CELL_COUNT];
     final int snakeY[] = new int[CELL_COUNT];
@@ -42,26 +42,31 @@ public class GameBoard extends JPanel implements ActionListener{
         draw(g);
     }
     public void draw(Graphics g){
-        //drawing gridlines
-        for (int i=0; i<(BOARD_WIDTH/CELL_SIZE);i++) {
-            //draw vertical lines: (x1, y1) = (CELL_SIZE, 0) to (x2,y2) = (SAME, BOARD_HEIGHT)
-            g.drawLine(i*CELL_SIZE, 0, i*CELL_SIZE, BOARD_HEIGHT);
-            g.drawLine(0, i*CELL_SIZE, BOARD_WIDTH, i*CELL_SIZE);
+        if (running){
+            //drawing gridlines
+            for (int i=0; i<(BOARD_WIDTH/CELL_SIZE);i++) {
+                //draw vertical lines: (x1, y1) = (CELL_SIZE, 0) to (x2,y2) = (SAME, BOARD_HEIGHT)
+                g.drawLine(i*CELL_SIZE, 0, i*CELL_SIZE, BOARD_HEIGHT);
+                g.drawLine(0, i*CELL_SIZE, BOARD_WIDTH, i*CELL_SIZE);
+            }
+            //drawing food
+            g.setColor(Color.red);
+            g.fillOval(foodX, foodY, CELL_SIZE, CELL_SIZE);
+            //drawing the snake
+            for (int i=0; i<snakeSize; i++) {
+                if (i == 0) {
+                    // set head color to different shade of green for improved visibility
+                    g.setColor(new Color(50, 200, 0));
+                    g.fillRect(snakeX[i], snakeY[i], CELL_SIZE, CELL_SIZE);
+                }
+                else {
+                    g.setColor(Color.GREEN);
+                    g.fillRect(snakeX[i], snakeY[i], CELL_SIZE, CELL_SIZE);
+                }
+            }
         }
-        //drawing food
-        g.setColor(Color.red);
-        g.fillOval(foodX, foodY, CELL_SIZE, CELL_SIZE);
-        //drawing the snake
-        for (int i=0; i<snakeSize; i++) {
-            if (i == 0) {
-                // set head color to different shade of green for improved visibility
-                g.setColor(new Color(50, 200, 0));
-                g.fillRect(snakeX[i], snakeY[i], CELL_SIZE, CELL_SIZE);
-            }
-            else {
-                g.setColor(Color.GREEN);
-                g.fillRect(snakeX[i], snakeY[i], CELL_SIZE, CELL_SIZE);
-            }
+        else {
+            gameOver(g);
         }
     }
     public void newFood() {
@@ -120,7 +125,12 @@ public class GameBoard extends JPanel implements ActionListener{
         }
     }
     public void gameOver(Graphics g) {
-
+        //game over text
+        String gs = "GAME OVER";
+        g.setColor(Color.RED);
+        g.setFont(new Font("SansSerif", Font.BOLD, 75));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString(gs, (BOARD_WIDTH-metrics.stringWidth(gs))/2, BOARD_HEIGHT/2);
     }
     @Override
     public void actionPerformed(ActionEvent e){
