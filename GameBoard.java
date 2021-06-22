@@ -118,11 +118,11 @@ public class GameBoard extends JPanel implements ActionListener{
             }
         }
         //check for snake-border collisions by x coordinate
-        if ((snakeX[0] < 0) || (snakeX[0] > BOARD_WIDTH)) {
+        if ((snakeX[0] < 0) || (snakeX[0] >= BOARD_WIDTH)) {
             running = false;
         }
         //check for snake-border collisions by y coordinate
-        if ((snakeY[0] < 0) || (snakeY[0] > BOARD_HEIGHT)) {
+        if ((snakeY[0] < 0) || (snakeY[0] >= BOARD_HEIGHT)) {
             running = false;
         }
         if (!running) {
