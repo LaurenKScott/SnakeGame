@@ -1,9 +1,10 @@
 # SnakeGame
-Snake game in Java, demonstrating OOP, simple GUI, event listeners, machine states
+<p>Snake game in Java, demonstrating OOP, simple GUI, event listeners, machine states. Made by following the Bro Code tutorial as seen on
+<a href = "https://www.youtube.com/watch?v=bI6e6qjJ8JQ">YouTube</a>.
 
 ### HOW TO PLAY
 
-<p> The snake begins as a single pixel on a fixed-size, bounded board. A single-cell piece of food (static) is 
+<p> The snake begins as a 3x1 cell rectangle on a fixed-size, bounded board. A single-cell piece of food (static) is 
 positioned randomly on the board. Score starts at zero. <br><br>
 Control the snake with the <b> UP, DOWN, LEFT, RIGHT </b> arrow keys, or with <b>W, A, S, D</b>
 The snake must navigate to the piece of food, colliding with the food head-on in order to eat it.<br>
